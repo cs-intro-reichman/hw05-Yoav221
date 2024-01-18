@@ -9,10 +9,10 @@ public class GameOfLife {
 
 	public static void main(String[] args) {
 		String fileName = args[0];
-		// test1(fileName);
+		test1(fileName);
 		// test2(fileName);
-		test3(fileName, 3);
-		//// play(fileName);
+		// test3(fileName, 3);
+		// play(fileName);
 	}
 
 	// Reads the data file and prints the initial board.
@@ -72,12 +72,12 @@ public class GameOfLife {
 		In in = new In(fileName); // Constructs an In object for reading the input file
 		int rows = Integer.parseInt(in.readLine());
 		int cols = Integer.parseInt(in.readLine());
-		int[][] board = new int[rows + 2][cols + 2];
+		int[][] board = new int[rows][cols];
 
-		for (int i = 1; i <= rows; i++) {
+		for (int i = 0; i < rows; i++) {
 			String row = in.readLine();
-			for (int j = 1; j <= cols; j++) {
-				if (j - 1 < row.length() && row.charAt(j - 1) == 'x') {
+			for (int j = 1; j < cols; j++) {
+				if (j < row.length() && row.charAt(j) == 'x') {
 					board[i][j] = 1;
 				} else {
 					board[i][j] = 0;
@@ -85,6 +85,7 @@ public class GameOfLife {
 
 			}
 		}
+
 		//// Replace the following statement with your code.
 		return board;
 	}
