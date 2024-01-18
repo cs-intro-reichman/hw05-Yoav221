@@ -9,9 +9,9 @@ public class GameOfLife {
 
 	public static void main(String[] args) {
 		String fileName = args[0];
-		test1(fileName);
+		// test1(fileName);
 		// test2(fileName);
-		// test3(fileName, 3);
+		test3(fileName, 3);
 		// play(fileName);
 	}
 
@@ -27,8 +27,11 @@ public class GameOfLife {
 		int[][] board = read(fileName);
 		for (int i = 1; i < board.length - 1; i++) {
 			for (int j = 1; j < board[0].length - 1; j++) {
-				System.out.println("the cell at row " + i + " and col " + j + " is " + cellValue(board, i, j));
+				if (cellValue(board, i, j) == 1) {
+					System.out.println("Cell (" + (i) + ", " + (j) + "): " + 1);
+				}
 			}
+
 		}
 		//// Write here code that tests that the count and cellValue functions
 		//// are working properly, and returning the correct values.
@@ -72,12 +75,12 @@ public class GameOfLife {
 		In in = new In(fileName); // Constructs an In object for reading the input file
 		int rows = Integer.parseInt(in.readLine());
 		int cols = Integer.parseInt(in.readLine());
-		int[][] board = new int[rows][cols];
+		int[][] board = new int[rows + 2][cols + 2];
 
-		for (int i = 0; i < rows; i++) {
+		for (int i = 1; i < rows; i++) {
 			String row = in.readLine();
 			for (int j = 1; j < cols; j++) {
-				if (j < row.length() && row.charAt(j) == 'x') {
+				if (j - 1 < row.length() && row.charAt(j - 1) == 'x') {
 					board[i][j] = 1;
 				} else {
 					board[i][j] = 0;
@@ -122,7 +125,7 @@ public class GameOfLife {
 		int cell = board[i][j];
 		if ((count(board, i, j) < 2) && (cell == 1)) {
 			return 0;
-		} else if ((count(board, i, j) >= 2) && (count(board, i, j) <= 3) && (cell == 1)) {
+		} else if (((count(board, i, j) == 2) || (count(board, i, j) == 3)) && (cell == 1)) {
 			return 1;
 		}
 
